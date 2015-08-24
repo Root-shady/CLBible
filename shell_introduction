@@ -50,5 +50,14 @@ Command line interface(CLI)
 4. Using the xterm Terminal Emulator
     xterm, The oldest and basic of terminal emulation package, which is often included by default in distributions.(Use less resources)
     The xterm package allows you to set individual features using the command line parameters.
-
+    (1. -bg color   
+    (2. -fb font(Font to use for the bold text)
+    (3. -fg color
+    (4. -fn font(Font to use for the text)
+    (5. -fw font(Fot to use for the wide text)
+    (6. -lf filename    (Specifies the filename to use for screen logging)
+    (7. -ms color(cursor color)
+    (8. -name name(The name of application that appears in the title bar)
+    (9. -ti terminal Specifise the terminal type to emulate
+    A plus may turn the features on, and - may turn the features off.
 
