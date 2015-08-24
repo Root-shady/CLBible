@@ -1,0 +1,68 @@
+Four parts that make up a linux system
+(1). The Linux kernel
+(2). The GNU utilities
+(3). A graphic desktop environment
+(3). Application software
+
+1. Linux kernel
+	Kernel controls all the hardware and software on the computer system, allocating hardware when necessary and executing software when required.
+	(1). System memory management
+		virtual memory location(space in disk called swap space)
+		The process of swapping out memory pages for running applications.
+	
+	(2). Software program management
+		Control process(init process)
+		(1. Start automatically on bootup(table of processes which is stored in /etc/inittabs)
+		(2. Ubuntu(/etc/init.d folder, which contains scripts for starting and stopping individual applications at boot time)
+	The linux operating system uses an init system that utilizes run levels. A run level can be used to direct the init process to run only certain types of processes, as defined in the /etc/inittabs file or /etc/rcX.d folders.
+		RunLevel(five run level in Linux)
+			A. At one, only the basic system process are started, along with one console terminal process.(single-user mode)
+			B. standard init run level is 3. network is support software is launched,.
+			C. rn level 5, start eh graphical X window software and allow you to log in and using the graphical desktop window.
+		Linux can control the overall system functionality by controlling the init run level.
+	
+
+	(3). Hardware management
+		To communicate with Devices, devices code are inserted inside the kernel code.
+			(1. Driver compiled in the kernel
+			(2. Driver modules added to the kernel
+		The linux system identifies hardware devices as special files, called device files.
+			(1. Character[handle data one character at a time]
+			(2. Block[handle large blck at a time  --> hard drive]
+			(3. Network[Use packets to send data and receive data --> networkcard and special loopback device]
+		Linux create special file called nodes.(Unique identification)
+
+	(4). Filesysstem management
+		Linux kernel can support different types of filesystems to read and write data to and from hard drives. 
+		(The Linux kernel interface with each filesystem using the Virtual File System(VFD), which provides a standard interface for the kernel to communicate with any type of filesystem.)
+2. The GUN utilities
+	The GNU project was mainly designed for Unix system administrators to have a Unix-like environment availiable.(A Unix system command line utilities) The core bundle of utilities supplied for linux system is called coreutils package.
+	(1). The shell
+		The shell is a special interactive utility that provides a way for user to start programs, manage files on the filesystem, and manage process running on the linux system(Default is the bash shell)
+
+3.  The linux destop environment
+	(1). The X window system
+		(Core to presenting graphics) The X window software is a low-level program that works directly with the vedio card and monitor in the PC, which ccontrols how application represent fancy windows and graphics.
+		The core X window software produces a graphical display environment,
+	(2). The KDE desktop
+		An open project to produce a graphic desktop similar to the Microsoft windows environment
+	(3). The GNOME desktop
+		GNU Network Object Model Environment (popular linux desktop environemnt)
+	(4). The Unity Desktop
+		Ubuntu(To provide a single desktop experience for workstations, table devices, and mobile devices.)
+	The shortcoming od the graphic destop is it requires a fair amount of system resources to operate properly.
+
+	(5). Linux distribution
+		A complete linux system package is called a distribution.
+		(1. Full core Linux distributions
+			A core linux distribution contains a kernel, one or more graphical destop environments, and just about every Linux application that is available, precompiled for the kernel.
+		(2. Specialized distributions
+			A subgroup of Linux distributions which based on one of the main distributions but contain only a subset of applications that would make sense for a special area use.(Many special linux distributions are based on the Debian Linux distribution)
+		(3. LiveCD test distributions
+			Bootable Linux CD distribution, which makes you run the linux without installing it.
+
+
+
+
+
+
