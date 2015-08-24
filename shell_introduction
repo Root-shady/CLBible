@@ -1,0 +1,54 @@
+Getting to the shell
+	
+Command line interface(CLI)
+	
+1. Terminals
+	(1). Console terminals(Emulate the old days of a hard-wired console terminal and is a direct interface to the Linux system)
+		When the Linux system starts, it automatically creates several virtual console. A virtual console is a terminal session that runs in Linux system memory.
+	(2). graphical terminal
+		 Terminal emulation package(A terminal emulation package simulates working on a console terminal, but within a desktop graphical window.)
+	Access one of the Linux virtual consoles using a keystroke combination. Ctrl-Alt key combination and then press a function key(F1~F7).
+	(3). Change the color of the virtual console
+		(1. setterm -inversescreen on
+		(2. setterm -background white
+			setterm -foreground black
+		Virtual console terminals are greate for accessing the CLI outside the GUI.
+
+2. Using the GNOME terminal emulator
+	GNOME ternimal is the GNOME desktop environment's default terminal emulator.
+	A launcher is an icon you create on your desktop that allows you to start a chosen application.
+	The GNOMW Ternimal menu bar contains the configuration and customization options you need to make your GNOME terminal the way you want.
+
+   (1. Keystroke for the GNOME terminal emulator
+    Open new terminal   Shift-Ctrl+N 
+    Open tab             Shift-Ctrl+T
+    Close tab            Shift-Ctrl+w
+    Close window         Shift-Ctrl+Q
+    
+    Copy                 Shift-Ctrl+C
+    Paste                Shift-Ctrl+V
+    Full screen         F11
+    Zoom in             Ctrl ++
+    Zoom out            Ctrl +-
+    Normal size         Ctrl-0
+
+    Search within the terminal session
+    Find                Shift-Ctrl-F
+    Find next           Shift-Ctrl-H
+    Find previous       Shift-Control+G
+
+    The tabs Menu
+    Next tab            Ctrl+Page Down
+    Previous Tab        Ctrl + Page Up
+    Move tab Left       Shift+Ctrl+Page Up
+    Move tab Right      Shift+Ctrl+Page Down
+
+3. Using the Konsole Terminal
+    The Konsole terminal is the default terminal emulator for the KDE environment.
+    The konsole Terminal menu bar contains the configuration and customization options you need to easily view and change feature in your emulation session.
+
+4. Using the xterm Terminal Emulator
+    xterm, The oldest and basic of terminal emulation package, which is often included by default in distributions.(Use less resources)
+    The xterm package allows you to set individual features using the command line parameters.
+
+
