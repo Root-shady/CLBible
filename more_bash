@@ -1,0 +1,60 @@
+Peek at the process
+    Use the ps:
+        (1). By default, the ps command shows only thre process that belong to the current user and that are running on the current terminal.
+    The GNU ps command that's used in Linux systems support three different types of command line parameters:
+        (1). Unix-style parameters, which are preceded by a dash.
+            -A      Shows all processes
+            -N      Show the opposite of the specified parameters
+            -a      Shows all processes except session headers and processes without terminal
+            -d      Show all processes except session headers.
+            -e      Show all the processes
+            -C cmslist      Shows processes with a group ID listed in cmdlist
+            -G grplist      Shows processes with a group ID listed in grplist.
+            -U userlist     Shows processes owned by a userid listed in userlist
+            -g grplist      Shows processes by session or by groupid contained in grplist
+            -p pidlis       Shows processes with PIDs in the list pidlist.
+            -s sesslist     Shows processes with session ID in the list pidlist
+            -t ttylist      Shows processes with terminal ID in the list ttylist
+            -u userlist     Shows processes by effective userid in the list userlist
+            -F              Uses extra full output
+            -O format       Displays specific columns in the list format, along with the default columns
+            -M      Display security information about the process
+            -c      Shows additional scheduler information about the process
+            -f      Display a full format string
+            -j      Show job information
+            -l      Display a long string listing
+            -o fprmat       Display only the specific columns listed format.
+            -y      Prevents display of process flags
+            -Z      Display the security context information.
+            -H      Display processes in a hierarchical format(Showing parent processes)
+            -n name list    Defines the values to display in the WCHAN column
+            -w      Use wide ouput format, for unlimited width displays
+            -L      Shows process threads
+            -V      Display the version of ps
+
+        (2). BSD-style parameters, which are not preceded by a dash
+        (3). GNU long parameters, which are preceded by a double dash.
+2. Some useful ps option:
+    -ef parameter combination --> To view everything runs in the system
+    -e  To show all the process running on the system
+    -f  To expands the output to show a few useful columns of information.
+  UID   User responsible for launching the process
+  PID   The process ID of the process
+  PPID  The PID of the parent process
+  C:    Processor utilization over the lifetime of the process
+  STIME:    The system time when the process started
+  TTY   The ternimal device from which the process was launched.
+  TIME  The cumulative CPU time required to run the process
+  CMD   The name of the program that was started.
+
+  Additional information about the process--> use the -l
+    (1). F  System flag assigned to the process by the kernel
+    (2). S: The state of the process(O=running on processor; S=sleeping; R=runnable, waiting to run, 
+            Z=Zombie, process terminated but parent not available; T=process stopped)
+    (3). PRI: The priority of the process(Higher numbers means lower priority)
+    (4). NI: The nice value, which is used for determined priority
+    (5). ADDR: The memory address of the process
+    (6). SZ: Approximate amount of swap space required if the process was swapped out
+    (7). WCHAN: Address of the kernel function where the process is sleeping.
+
+

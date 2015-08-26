@@ -1,1 +1,138 @@
-io
+Basic bash shell commands
+    
+
+1. Starting the shell
+    Bash shell provide an interactive access to Linux system.
+    /etc/passwd files contains a list of all the system user accounts.
+    christine:x:501:501:Christine Bresnahan:/home/christine:/bin/bash
+    The last field specifies the user's shell program.
+
+2. Interacting with the bash manual
+    The man command provides access to the manual pages stored on the Linux system. Entering the man command followed by a specific command name provides that utility's manual entry.
+    Displayed with a utility called pager, that allows you to page through displayed text.
+  Man page conventional section names:  
+    (1). Name   Displays command name and a short description
+    (2). Synopsis   Show command syntax
+    (3). Configuration  Provides configuration information
+    (4). Description    Describe command generally
+    (5). Options         Describes command options
+    (6). Exit Status    Define command exit status indicators
+    (7). Return value       Descrieb command returned values
+    (8). Errors         Provide command error message
+    (9). Environment        Descibe environment variables used
+    (10). Files     Define files used by the command
+    (11). Versions        Version command version information
+   man -k keywork(Can't remember all the command name)
+   In addition to the conventionally named sections for a man page, there are man page section area,(assigned one number)
+   Example: man 7 hostname
+ Also, there are other information pages called info pages. You can call is use the info command.
+ Last but not least, most command accepts the -help or --help option.
+
+
+ 3. Navigating the filesystem
+    Home directory(when you log in)
+    Linux stores files within a single directory structure, called a virtual directory. The virtual directory contains file paths from all the storage devices installed on
+ the computer, merged into a single directory structure.
+    The first hard drive installed in a linux system is called the root drive, the root drive contains the virtual directory core. Everything else builds from there
+    Linux use special directories as mount point. Mout points are directorys in the virtual directory where you can assign additional storage devices.
+
+Common linux directory names:
+    (1). /          Root of the virtual directory, where normally, not files are placed.
+    (2). /bin       Binary directory, many GNU user-level utilities are stored
+    (3). /boot      boot directory, where boot files are stored
+    (4). /dev       Device directory, where linux create device nodes
+    (5). /etc       System configuration files directory
+    (6). /home      home directory, where linux create user directories
+    (7). /lib       Library directory, where system and application library files are stored
+    (8). /media     Media directory, a common place for mount points used for removable media
+    (9). /mnt       mount directory, another common place for mount points used for removable media
+    (0). /opt       optional direcotry, often used to store third-party software package and data files.
+    (01). /proc     process directory, where the current hardware and process information is stored.
+    (02). /root     root home directory
+    (03). /sbin     System binary directory, where many GNU admin-level utilities are stored. 
+    (04). /run      run directory, where runtime data is held during system operation
+    (05). /srv      Service file, where local services store the file
+    (06). /sys      system directory, where system hardware information files are stored
+    (07). /tmp      temporary directory, where temporary work file can be created and destroyed.
+    (08). /usr      User binary directory, where the bulk of GNU user-level utilities and data files are stored
+    (09). /var      Variable directory, for files that change frequently, such as a log file.
+File Hierarchy Standard(FHS)
+
+
+4. Traverse the directory
+    (1). absolute directory   The absolute directory reference defines exactly where the directory is in the virtual directory structure, start from the root.
+    (2). relative directory  Specify a destination directory reference relative to your current location.
+    pwd --> present working directory
+    ls --> list(The LS_COLOR environment variable controls the color of the displayed files or directories)
+        (1. Use the -F option to distinguish the directory and file. 
+            Since the parameter flags the directory with a forward slash(/), and flags executable files with an asterisk(*)
+        (2. The -R parameter, called the recursive option, it shows files that are contained within subdirectories in the current directory.
+        (3. Filtering listing output(When you specify the name of a specific file as the filter, the ls command only shows that file's information.)
+            And that is where the wild character comes in and also the regular expression.
+            A. A question matk ? to represnt one character
+            B. A asterisk* to represent any number of characters.
+            C. [a-z] Which represent a to z respectively.
+            D. exclamation point(!) which indacate it is not included in the pattern.
+        File globbing, which is the process of pattern matching using wildcards.(metacharacter wildcards)
+        (4. -d option, which list the information of the directory, instead of the information inside it.
+5. Files
+  touch command creates the new file you specify and assigns your uername as the file owner. Also, it can be used to change the modification time.
+  Add a additional parameter --time=atime, the file's altered access time is displayed.
+  (1). Copy the file
+    copy source destination 
+    Use the -i option to force the shell to ask whether you want to overwrite the existing file in the destination.
+    When the destination is a directory, make sure you add the / slash in the end of the command.(Error detection)
+    -R option, which allows you to recursively copy the content of an entire directory in one command.
+ (2). The auto completion
+    tab auto-complete, give the shell enough filename characters so it can distinguish the desired file from other files.
+
+ (3). linking files
+    If you need to maintain two(or more) copies of the same file on the system, instead of having separate ohysical copies, you can use one physical copy and multiple virtual copies, called links.
+    (1. symbolic link
+        Simply a physical file that points to another file somewhere in the virtual direcotry structure(Don;t share the same content)
+        ln -s source destination
+        (Then symbolic file only points to the target file, they don't share the same content)
+    To tell whether two file are separate physical files by viewing their inode number. The inode number is a unique identification number that the kernel assigns to each object in the filesystem.
+    To view a file or directory's inode number, add the -i parameter to the ls command.
+
+   (2. hard link
+    A hard link creates a separate virtual file that contains information about the original file and where to locate it.(They are the same file)
+    ln sourcefile destination
+    When use the ls -li view the created hard link, you can find that they have the same inode umber since they are the same file pysically, also the link count will change.
+    
+    You can only create a hard link between files on the same physical medium, to create a link between files under separate physical mediums, you must use a symbolic link.
+    Advoid create a chain of links that can be confuse -- easily broken -- causing all sorts of problem.
+
+ (4). Rename filename
+    mv only affects file's name.
+    use the -i option, to remind the user before override any existing file.
+ (5). remove file
+    -r option to remove file recursively
+    -f option to remove file force, without any prompt
+    -i option to remind the user whether to delete the file.
+ (5). directory
+    mkdir 
+    -p to create several directories and subdirectories at the same time.
+  Example:
+    mkdir -p new_Dir/sub_dir/under_dir
+
+6. file contents
+    (1). View the file type
+        Use the file command. which pee k inside a file and determine just what kind of file it is.(Also determine whether the text file is ASCII text) As for a binary executable program, the file command determines the platform that the program was compiled for and what type of libraries it required.
+
+    (2). view the content of the file
+        cat command 
+            (1. Use the -n parameter, it will number all the lines for you.
+            (2. To number the lines that have text in them, the -b parameter is suitable.
+            (3. Don't want the tab appear use the -T parameter
+        more/less command
+            Use the man utilities for more information
+    (3). view parts of the file
+        (1. tail(By default, it shows 10 lines)
+            -n option, to specify how namy lines being displayed.
+            -f option, allow you to peek inside a file as the file is being used by otehr processes.(Modify the system log files in real-time mode.)
+
+        (2. head command
+            
+
+
