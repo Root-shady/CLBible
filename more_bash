@@ -1,5 +1,5 @@
 Peek at the process
-    Use the ps:
+    1. Use the ps:
         (1). By default, the ps command shows only thre process that belong to the current user and that are running on the current terminal.
     The GNU ps command that's used in Linux systems support three different types of command line parameters:
         (1). Unix-style parameters, which are preceded by a dash.
@@ -57,4 +57,73 @@ Peek at the process
     (6). SZ: Approximate amount of swap space required if the process was swapped out
     (7). WCHAN: Address of the kernel function where the process is sleeping.
 
+    The GNU developer(New improved ps command)
+    --deselect      Show all processes except those listed in the command line.
+    --Group grplist Show process whose group ID is listed in grplist
+    --User userlist Show processes whose user ID is listed in the userlist
+    --group grplist Shows process whose effective group ID is listed in grplist.
+    --pid pidlist   Shows proceses whose process ID is listed in pidlist
+    --ppid pidlist   Shows proceses whose parent process ID is listed in pidlist
+    --sid sidlist   Shows proceses whose session ID is listed in the sidlist
+    --user userlist   Shows proceses whose effective user ID is listed in userlist
+    --format format Displays only columns specified in the format 
+    --context       Display additional security information
+    --cols n        Select screen width to n columns
+    --columns n     Set screen width to n columns
+    --cumulative    Includes stopped child process information
+    --forest        Display processes in a hierarchical listing showing parent processes
+    --headers       Repeats column headers on each page of output
+    --no-headers    Prevents display of column headers
+    --lines n       Sets the screen height to n lines
+    --rows n        Sets the creen height to n rows
+    --sort order    Defines the column(s) use for sorting the output
+    --width n       Sets the screen width to n columns
+    --help          Displays the help information
+    --info          Displays debugging information
+    --version       Display the cersion of the ps program.
+    The ps command can display information only for a specific point in time. While the top command 
+  displays the process information similarly to the ps command, but in real-time mode.
+   
+ 2. The top command
+    The load average, the higher the value is, the more load the system is experiencing.
+(Over 2, which may means the system is getting busy)
+    Information format:
+        (1). PID:   The process ID of the process
+        (2). User:  The User name of the owner of the process
+        (3). PR:    The priority of the process
+        (4). NI:    The nice value of the process
+        (5). VIRT:  The total amount of virtual memory used by the process
+        (6). RES:   The amount of physical memory the process is using.
+        (7). SHR:   The amount od memory the process is sharing with other processes
+        (8). S:     The process status(D=interrupted sleep, R=Running, S=Sleeping, T=traced or steopped, or Z=zombie)
+        (9). %CPU   The share of CPU time that the process is using.
+        (10).%MEM   The share of available physical memory the process is suing.
+        (11). TIME+ The total CPU time the process has used since starting
+        (12). COMMAND  The command line name of the process
+    Default, the top program sort the processes based on the %CPU time.
+    Each interactive command is a single character that you can press while top is running and changes the behavior of the program.
+    Pressing the f allow you to select the field to use, to sort the output
+    Pressing the d allows you to change the polling interval
+    Pressing the q to quit the top dislpay         
+
+3. Stopping process
+    Processes communicate with each other using signals, a process signal is a predefined message recognize and may choose to ignore or act on.
+    Signal      Name        Description
+    1           HUP         Hangs up
+    2           INT         Interrupt
+    3           QUIT        Stop running
+    9           KILL        Unconditionally terminates
+    11          SEGV        Produces segment violation
+    15          TERM        Terminate if possible
+    17          STOP        Stop unconditionally, but dosen't terminate
+    18          TSTP        Stops or pauses, but continues to run in backgroud
+    19          CONT        Resume execution after STOP or TSTP
+ (1).  Teh kill command allows you to send signal processes based ib their process ID(PID)
+  By default, it sends a TERM signal to all the PIDFS listed on the command.(Only with process PID, instead of command name.)
+  -s parameter allows you to specify other signals.
+  Example:
+    kill -s HUP 3940
+ (2). The killall command
+    The killall command allows you to use wildcard character as well as, using the process name.
+        killall http*
 

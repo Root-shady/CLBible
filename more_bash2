@@ -1,0 +1,149 @@
+Monitoring Disk Space
+    Keep trace of the disk usage on the system
+1. Mounting media
+    To mount a removable media, a removable media device is a medium that can be easily removed from the PC.
+    (1). The mount command
+        By default, the mount command displays a list of media devices currently mounted on the system
+        1). The device filename of the media
+        2). The mount point in the virtual directory where the media is mounted         
+        3). The filesystem type         
+        4). The access status of the mounted media
+    mount -t type device directory
+    The type parameter defines the filesystem type under which the disk was formatted. 
+    The next two parameters define the location of the device file for the media device and the location in the virtual 
+    directory for the mount point.
+    
+    (2). The mount command parameters
+        -a      Mounts all filesystems specified in the /etc/fstab file         
+        -f      Cause the mount command to simulate mountng a device, but not actually mount it.
+        -F      Mount all the filesystems at the same time when used with -a parameter
+        -v      Explain all the steps required to mount the device, stands for verbose mode
+        -n      Mounts the device without registering it in the /etc/mstab mounted device file
+        -p num  For encryped mounting, reads the passphrase from the file descriptor num
+        -s      Ignore mount options not supported by the filesystem
+        -r      Mount the devies as read-only.
+        -I      Tells you not to use any filesystem helper file under /sbin/mount/.filesystem
+        -l      Adds the filesystem labels automatically for ext2, ext3, or XFS filesystem
+        -w      Mounts the devices as read-write 
+        -L label   Mounts the devicdes with the specified label
+        -U uuid     Mounts the device with the specified uuid
+        -O       When use with the -a parameter, limits the set of filesystems applied.
+        -o       Adds specific options to the filesystem
+    ro:  Mounts as read-only
+    rw: Mounts as read-write
+    user: Allows an ordinary user to mount the filesystem
+    check=none; Mounts the filesystem without performing an integrity check
+    loop: Mouse a file
+
+    (3). The umount command
+        First unmount the device, and then reject it.
+    umount [directory | device]
+    The umount command gives you the choice of defining the media device by either its device location or its mounted direcotry name.
+
+--------------------------------------------------------------------------------------------------------------------------------
+  2. Peek at the storage of the computer 
+  (1). Using the df command
+    The df command shows each mounted filesystem that contains data.(The mount point where the device is mounted)
+    Option -h   Shows the disk space in human-readable form.
+  (2). Using the du command
+    The du command shows the disk usage for specific directory(The current directory by default)
+    By default, the du command displays all the files, directories and subdirectories under current directory, and it show many disk blocks each file or directory takes.
+    Options:
+        -c: Produce a grant total of all files listed
+        -h: Prints sizes in human-readable form, using k for kilobytes, M for megabyte, and G for gigabyte
+        -s Summarizes each argument
+
+-------------------------------------------------------------------------------------------------------------------------------
+Working with Data files(Manipulate large amount of data)
+    (1). sorting data
+        The sort command sorts the data lines in a text file using standard sorting rules for the language you specify as the default for the session.
+    -n parameter to tell sort command to recognize numbers as numbers instead of characters
+    -M parameter to tell sort command to the month sort.
+
+    Some useful parameter below:
+        (1). -b  --ignore-leading-blanks   Ignore leading blanks when sorting
+        (2). -C  --check=quiet   Dosen't sort, but dosen't report if data is out of sort order
+        (3). -c  --check         Dosen't sort, but check if the input data is already sorted, and report if not sorted,
+        (4). -d --dictionary-order  Consider only blanks and alphanumeric character, dosen't consider special character
+        (5). -f --ignore-case     By default, sort orders capitalized  letter first, ignore case
+        (6). -g --general-numeric-sort  Uses general numerical value to sort
+        (7). -i --ignore-nonprinting    Ignore noneprintable character in sort
+        (8). -M --month-sort    Sort by month order using three-character month names
+        (9). -m --merge     Merge two already sorted data files
+        (10). -n --numeric-sort Sorts by string numerical value
+        (11). -o --output=file  Write results to file specified
+        (12). -R --random-sort  Sorts by a random hash key
+        (13). -r --reverse      Reverse the sort order
+        (14). -S --buff-size = SIZE Specifies the amount of memory to use
+        (15). -T --temporary-direction = DIR Specifies a location to store temporary working file
+        (16). -u --unique   output only the first occurence of two similar lines.
+        (17). -z --zero-terminated  Ends all lines with a NULL character instead of a new line
+        (18). -k --key=POS1[,POS2] Sorts based on position POS1, and ends at POS2 if specified.
+        (19). -t --field-separator=SEP  Specifies the character used to distinguish key position
+    The -k and -t parameters are handy when sorting data use fields.
+        Example1:
+            Sort the passwd file based on numeric userid:
+            $ sort -t ':' -k 3 -n /etc/passwd
+        Example2:
+            Find the bigest file given the directory
+            $ du -h | sort -nr   #Notice that the n means to sort by the numeric order   
+
+    (2). Search for data
+        grep [options] pattern [file]
+    The grep command searches either the input or the file you specify for lines that contain characters that match the specified pattern.
+        (1. -v   to reverse search
+        (2. -n To show the line number
+        (3. -c To see how many lines that match
+        (4. -e To specify more than one pattern
+            Example:    
+                Search any lines that contain either f, or t
+                $ grep -e t -e f file1
+        The grep command use basic Unix-style regular expressions to match patterns.
+        The egrep command is an offshoot of grep, which allow you to specify POSIX extended regular expressions, whcih contains more character for specifying the matching pattern.
+
+    (3). compress the data
+        Linux file Compression Utilities
+    Utility         File Extension      Description
+    bzip2           .bz2                Use the Burrows-Wheeler block sorting text compression algorithm and Huffman coding
+    compress        .Z                  Original Unix file compression utility, starting to fade away into obscurity
+    gzip            .gz                 The GNU project's compression utility, use Lempel-Ziv coding
+    zip             .zip                The Unix version of the PKZIP program for windows
+     
+    The gzip package is a creation of the GNU project to create a free version of the original Unix compress utility.
+    (1). gzip   for compress files
+    (2). gzcat  for displaying the content of compressed text files
+    (3). gunzip for uncompressing files
+  You can gzip -r myfolder which will gzip files recursively, and use the gunzip -r myfoder to unzip files recursively.
+
+    (4). Archiving data
+        The standard utility for compressing and archiving data in a single file is call tar.
+            tar function [options] object1 object2
+        -A --concatenate    Appends an existing tar archive file to another existing tar archive file
+        -c  --create        Create a new archive file
+        -d  --diff          Checks the difference between a tar archive file and the filesystem
+            --delete        Delete from an existing tar archive file
+        -r  --append        Appends files to the end of an exisitng tar archive file
+        -t  --list          Lists the contens of an exisiting tar archive file
+        -u  --update        Appends files to an existing tar archive file that are newer than a file with the same name in the exisitng                             archive
+        -x  --extract       Extract files from an existing archive files
+        -C dir              Changes to the cpecified directory
+        -f file             Outputs results to file(or device) file
+        -j                  Redirect output top the bzip command for compression
+        -p                  Preserves all file permission
+        -v                  Lists files as they are processed
+        -z                  Redirects the output to the gzip command for compression
+    Example:    
+        (1.  tar -cvf  test.tar test/ test2/
+            Create an archive file called test.tar containing the contents of both tje test directory and the test2 directory.
+        (2. tar -tf test.tar    
+            list(but not extract) the contents of the tar file test.tar
+        (3. tar -xvf   test.tar
+            Extract the contents of the test.tar.
+===================================================================================================================================
+In order to "zip" a directory, the correct command would be:
+   (1). tar -zcvf archive.tar.gz directory/
+  This will tell tar to c(create) and archive from the files in the directory(tar is recursive by default), compress it 
+  using the z(gzip) algorithm, store the output as f(file) named archive.tar.gz, and v(verbosely) list all the files it adds to the archive.
+    (2). tar -zxvf archive.tar.zip
+    To decompress and unpack the archive into the current directory.
+
