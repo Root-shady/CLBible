@@ -1,0 +1,84 @@
+Understanding the Shell
+    A shell is a complicated interactive running program.
+    The shell program starts depends on your user ID configuration.(/etc/passwd) The default shell program is started whenever the user logs into a virtual console terminal or starts a terminal emulator in the GUI.
+    CentOS  --> tcsh(based on C shell)
+    Debian based version(dash)
+  The default system shell is used for system shell scripts, called /bin/sh, such as those needed at startup.
+  For bash shell scripts, these two different shells, default interactive shell and default system shell, can cause problems.
+
+1. Exploring parent and child shell relationship
+    The default interactive shell started when a user logs into a virtual console terminal or starts a terminal emulator in the GUI is a parent shell. 
+    Use the ps command with the -f option, which is represent for do full-format listing.
+    (1). When a child shell process is spawnedm only some of the parent's environment is copied to the shell environment,
+    ps --forest  or -H
+    Show a hierachy structure of the process, showing the relationship between parents and child processes.
+    (2). The bash command Line parameters
+    -c string       Reads commands from string and processes them
+    -i              Starts an interactive shell, allowing input from user
+    -l              Acts as invoked as a login shell
+    -r              Starts a restricted shell, limiting the user to default directory
+    -s              Reads commands from standard input
+    (3). Looking at process lists
+    Designate a list commands to be run one after another, suing the semicolon(;)
+    For a command list to be considered a process list, the commands must be encased in parentheses.
+    Adding the parentheses and turning the command list into a process list created a subshel to execute the commands. A process list is a command grouping type.
+    $BASH_SUBSHELL  --> turns 0, then there is no subshell
+                    --> turns 1, then there is 1 or more
+    A process list is a command grouping enclosed with parenthese, which creates a subshell to execute the commands.
+    $ (pwd ; echo $BASH_SUBSHELL) 
+    Which print out the present working directory and then 1
+    Subshells are often used for multi-processing in the shell scripts.(However, entering into a subshell is an expensive method and can significantly slow down processing.)
+    But since the terminal gets tied up with the subshell's I/O, it is not truly multi-processing
+    
+    (4). Creatively using the subshell
+        (1. Background mode
+            Running a command in background mode allow the command to be processed and frees up your CLI for other use.
+            To put a command into background mode, the & character is traked onto its end. Then two information items are returned, one is the background job's number, and the second item is the background job's process ID.               You can use the job command to display background job infromation. The job command displays any user's processes(jobs) currently running in the background mode.
+        Use the -l option to see more detail about the process running on the background.
+
+        (2. Putting process lists into the background
+            Putting process list into the background causes a job number and process ID to appear, and the prompt returns. And the result will get displayed to the screen.
+            Using a process list in background mode is one creative method for using subshell at the CLI. You can do large amounts of processing within a subshell and not have your terminal tied up with the subshell's I/O.
+
+        (3. co-processing
+            Two things: Spawns a subshell in the background mode and execute a command within that subshell.
+            To perform co-processing, the coproc command is used along with the command to be executed in the subshell.(Co-processing perfomras almost identically to putting a command in background mode, except for the  fact that it creates a subshell.)
+            You can set the name yourself by using extended syntax for the command. 
+            $ coproc My_Job { sleep 10; }
+#Make sure that a space appears after the first curly bracket({) and before the start of your command. And also, you need to make sure the command ends with a semicolon(;) And you have to ensure that a space appears after the semicolon and before the closing curly bracket.
+        (4. Combine co-processing with process list
+            Creating nested subshells.
+            $ coproc ( sleep10; pwd; sleep 10 )
+        Remember that spawning a subshell can be expensive and slow, creating nested subshells is even more so!
+
+2. Understand Shell buil-in commands
+    built-in commands and non-built-in command(external) command
+    A external command, sometimes called a filesystem command, is a program that exists outside of the bash shell.  
+    To locate where the program resides in the filesystem(Only works for external command)
+      $ which external_utilities
+    Use the type command to determine which type the command belongs.
+      $ type command_name
+    Whenever an external command is executed, a child process is created. This action is termed forking.
+  If you fork a child process or create a subshell, you can still communicate with it via signaling, Signaling allows process to communication via signals.
+  (Built-in command are less expensive, since not forking is required.)
+  (1). Built-in command
+    Don't need a child process to execute, and they are compiled into the shell and thus are part of the shell's  toolkit.(faster and more efficient)
+    To see mutiple flavoors for commands, use the -a option on the type commnad.(echo, pwd)
+    $ type -a echo
+      echo is a shell builtin
+      echo is /bin/echo
+  (2). History
+    To set the number of commands to keep in the bash history, modify an environment variable called HISTORY
+    To recall and reuse your last command, type !! and press Enter key.
+    Force the command history to be written to the .bash_history file before leaving a shell session, using the -a option.
+    The histories are ot automatically updated for your other open terminal sessions. This is because the .bash_history file is read only when a terminal session is first started. To force the .bash_history file to be reread and a ternimal session's history to be updated, use the history -n command.
+   
+    (3). Using command aliaes
+        A command alias allows you to create an alias name for command commands(along with their parameters) to help your typing miminum.
+        A. To see a list of active alias 
+           On Linux ubuntu, alias is used to override the standdard ls command. Which automatically provide the --color parameter, including that the terminal support color mode listings.
+            alias -p
+        
+    
+
+

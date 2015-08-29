@@ -52,6 +52,7 @@ Monitoring Disk Space
         -c: Produce a grant total of all files listed
         -h: Prints sizes in human-readable form, using k for kilobytes, M for megabyte, and G for gigabyte
         -s Summarizes each argument
+        -d 2  Control the depth of the du utility gose.
 
 -------------------------------------------------------------------------------------------------------------------------------
 Working with Data files(Manipulate large amount of data)

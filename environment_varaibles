@@ -1,0 +1,99 @@
+    Linux environment variables help you define your Linux shell experience.
+ (1). obtain system information
+ (2). Store temporary data
+ (3). configuration information
+
+1. Exploring Environment Variables
+    The bash shell uses a feature called environment variable to store information about the shell session and the working environment. To store persistent data.
+    
+    Global and local variables
+ (1). Global variables
+    Global environment variables are visible form the shell session and from any spawned child subshells.
+    The Linux systsem sets several global environment variable when you start your bash session.
+    A. View all the global environment variables:
+        $ printenv
+    B. All the global vairables
+        $ env
+        The env command has additonal functionality that printenv dose not have, making it the slightly more powerful command.
+    C. To display an individual environment variable's value
+        $ printenv HOME
+        $ echo $HOME
+      Using the dollar sign along with the variable name dose more than just display its current definition when used with the echo command. The dollar sign before a variable name allows the variable to be passes as a common parameter.
+
+ (2). Local environment variables
+    Can be seen only in the local process in which they are defined.
+    The set command displays all variables defined for specific process, including both local and global environment variables and user-defined variables.
+    The set command displays both global and local environment variables and user-defined variables. It also sort the display alphabetically.
+
+ (3). Setting user-defined variables
+    variable=happy (If you need to addign a string value that contains space, you need use a single or double quotes to delineate the beginning and the end of the string.)
+    The standard bash shell convention is for all environment variables to use uppercase letters. If you are creating a local variable for yourself and your own shell scripts, use lowercase letters.(case sensitive)
+
+ (4). Setting global environment variables
+    First create a local variable, then export it to the global environment
+    Using the export command.
+    Changing a global environment variable within a child shell dose not affect the variable's value in the parent shell.
+ (5). Removing environment variables
+    unset command
+        unset my_variable
+    If you're in child process, and you unset a global variable, then it applies only to the child process. The global environment variable still available in the parent process.
+
+    
+2. Uncovering default shell environment variables
+    PATH    A colon-separated list of directories where the shell looks for commands.
+    PS1:    The primary shell command line interface prompt string.
+    RANDOM  Retrun a random number between 0 and 32767
+    SECONDS The number of seconds since the shell was started.
+    SHLVL   Indicate the shell level, incremented by one each time a new bash shell is started.
+    UID     The numeric real user ID of the current user.
+
+    A common trick for programmer is to include the single dot symbol to their PATH environment variable. 
+    
+    (1). Startup files or environment files.
+        The startup files that bash processes depend on the method you use to start the bash shell.
+            (1). As a default login shell at login time
+                
+                /etc/profile (All user on the system execute this startup file when they log in)
+                Which will normall related to the file in /etc/profile.d/
+                Most applications create two startup files --one for the bash shell(.sh extension), one for the cshell(.csh extension)
+
+                    Used for customization for individual user's requirements, to rpovide a user-specific startup file for definning user-specific environment variables.
+                The first file found in the following ordered list is run, and the rest are ignored.
+                $Home/.bash_profile  
+                $HOME/.bash_login
+                $HOME/.profile
+                The $Home/.bashrc is typically run from one of the other  files.
+            
+            (2). As an interactive shell that is started by spawning a subshell
+                Only check for the $HOME/.bashrc file
+
+            (3). As a non-interactive shell to run a script.
+                You may want to run specific startup commands each time you start a script on your system, the bash shell provides the BASH_ENV environment variable.
+    
+    (2). Change the system environment variable permanently.
+        (1. For all the user in the system. Put it in the /etc/profile, but this is a bad idea, since when you upgrad, you may loseall the cusomized variables setting.
+            To create a file ending with .sh in the /etc/profile.d directory.
+        (2. individual user's persistent bash shell
+            put the variable in the $HOME/.bashrc file.
+
+
+3. Learning about the variable arrays
+    $ mytest=(one two three four five)
+    To reference an individual array element, you must use a numeric index value, which represent its place in the array. The numeric value is enclosed in sqaure brackets.
+        $ echo ${mytest[2]}  Start with an index value of zero
+    To display an entire array variable, you use the asterisk wildcard character as the index value.
+        $echo ${mytest[*]}
+    You can always change the value of an individual index position
+        $ mytest[2]=seven
+    You can event use the unset command to remove an individual value within the array.
+        $ unset mytest[2]
+    If you echo the unset position, it will give you a blank line.
+    Remove the entire array by using the array name in the unset command.
+        $ unset mytest
+    Variable Arrays are not very portable to other shell environment, which is a downside if you do lots of shell programming for different shells. 
+
+
+
+        
+
+
